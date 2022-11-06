@@ -13,7 +13,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_dotenv: ^5.0.2
-  giphy_get:
+  giphy_selector:
     path: ../
 
   provider: ^6.0.0
