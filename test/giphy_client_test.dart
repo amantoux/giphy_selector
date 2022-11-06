@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:giphy_get/giphy_selector.dart';
+import 'package:giphy_selector/giphy_selector.dart';
 import 'package:http/http.dart';
 import 'package:mockito/mockito.dart';
 
