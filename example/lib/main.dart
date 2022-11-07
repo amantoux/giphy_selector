@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Giphy Get Demo',
+      title: 'Demo',
       theme: ThemeData(
         brightness: Brightness.light,
         primarySwatch: Colors.blue,
@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
         Locale('es', ''),
         Locale('fr', ''),
       ],
-      home: const MyHomePage(title: 'Giphy Get Demo'),
+      home: const MyHomePage(title: 'Demo'),
       themeMode: ThemeMode.system,
     );
   }

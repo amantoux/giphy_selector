@@ -2,7 +2,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  const MethodChannel channel = MethodChannel('giphy_get');
+  const MethodChannel channel = MethodChannel('giphy_selector');
 
   TestWidgetsFlutterBinding.ensureInitialized();
 
