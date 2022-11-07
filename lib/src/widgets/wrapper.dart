@@ -1,25 +1,25 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:giphy_selector/src/widgets/config.dart';
 
 import '../client/client.dart';
 import 'sheet.dart';
 
 class GiphySelector {
-  // Show Bottom Sheet
   static Future<GiphyGif?> getGif({
     required BuildContext context,
     required String apiKey,
     String rating = GiphyRating.g,
     String lang = GiphyLanguage.english,
-    String randomID = "",
-    String searchText = "",
-    String queryText = "",
+    String randomID = '',
+    String searchText = '',
+    String queryText = '',
     bool modal = true,
     Color? tabColor,
-  }) {
-    if (apiKey == "") {
-      throw Exception("apiKey must be not null or not empty");
+  }) async {
+    if (apiKey.isEmpty) {
+      throw Exception('apiKey must be not null or not empty');
     }
 
     return showModalBottomSheet<GiphyGif>(
@@ -28,15 +28,48 @@ class GiphySelector {
           borderRadius: BorderRadius.vertical(top: Radius.circular(10.0))),
       isScrollControlled: true,
       context: context,
-      builder: (ctx) => SafeArea(
-        child: GiphySelectorSheet(
-          apiKey: apiKey,
-          lang: lang,
-          randomID: randomID,
-          rating: rating,
-          searchText: searchText,
-          tabColor: tabColor,
-        ),
+      builder: (ctx) => GiphySelectorSheet(
+        apiKey: apiKey,
+        lang: lang,
+        randomID: randomID,
+        rating: rating,
+        searchText: searchText,
+        tabColor: tabColor,
+      ),
+    );
+  }
+
+  static Future<void> show({
+    required BuildContext context,
+    required String apiKey,
+    required OnSelectGiphyItem onSelectGiphyItem,
+    String rating = GiphyRating.g,
+    String lang = GiphyLanguage.english,
+    String randomID = '',
+    String searchText = '',
+    String queryText = '',
+    bool modal = true,
+    Color? tabColor,
+  }) {
+    if (apiKey.isEmpty) {
+      throw Exception('apiKey must be not null or not empty');
+    }
+
+    return showModalBottomSheet<GiphyGif>(
+      clipBehavior: Clip.antiAlias,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(10.0)),
+      ),
+      isScrollControlled: true,
+      context: context,
+      builder: (ctx) => GiphySelectorSheet(
+        apiKey: apiKey,
+        lang: lang,
+        randomID: randomID,
+        rating: rating,
+        searchText: searchText,
+        tabColor: tabColor,
+        onSelectGiphyItem: onSelectGiphyItem,
       ),
     );
   }
@@ -62,10 +95,9 @@ class GiphySelectorWrapper extends StatelessWidget {
     GiphyGif? gif = await GiphySelector.getGif(
       queryText: queryText,
       context: context,
-      apiKey: apiKey, //YOUR API KEY HERE
+      apiKey: apiKey,
       lang: GiphyLanguage.spanish,
     );
     if (gif != null) streamController.add(gif);
-    // stream.add(gif!);
   }
 }

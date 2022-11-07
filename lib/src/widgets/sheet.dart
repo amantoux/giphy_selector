@@ -12,19 +12,21 @@ class GiphySelectorSheet extends StatefulWidget {
   const GiphySelectorSheet(
       {Key? key,
       required this.apiKey,
-      this.tabColor,
+      this.onSelectGiphyItem,
       this.searchText,
       this.rating = GiphyRating.g,
       this.lang = GiphyLanguage.english,
-      this.randomID = ''})
+      this.randomID = '',
+      this.tabColor})
       : super(key: key);
 
   final String apiKey;
-  final Color? tabColor;
+  final OnSelectGiphyItem? onSelectGiphyItem;
   final String? searchText;
   final String rating;
   final String lang;
   final String randomID;
+  final Color? tabColor;
 
   @override
   State<GiphySelectorSheet> createState() => GiphySelectorSheetState();
@@ -76,6 +78,7 @@ class GiphySelectorSheetState extends State<GiphySelectorSheet>
       randomID: widget.randomID,
       rating: widget.rating,
       language: widget.lang,
+      onSelectGiphyItem: widget.onSelectGiphyItem,
       child: DraggableScrollableSheet(
         expand: isExpanded,
         minChildSize: _minExtent,
@@ -451,7 +454,7 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
         child: CircularProgressIndicator(),
       );
     }
-
+    final config = GiphySelectorConfig.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       // child: StaggeredGrid.countB
@@ -464,41 +467,40 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
         crossAxisSpacing: _spacing,
         itemBuilder: (ctx, idx) {
           GiphyGif gif = _list[idx];
-          return _item(gif);
+          double aspectRatio = (double.parse(gif.images!.fixedWidth.width) /
+              double.parse(gif.images!.fixedWidth.height));
+          return ClipRRect(
+            borderRadius: BorderRadius.circular(10.0),
+            child: InkWell(
+              onTap: () => (config.onSelectGiphyItem ?? _selectedGif).call(gif),
+              child: gif.images == null || gif.images?.fixedWidth.webp == null
+                  ? Container()
+                  : Image.network(
+                      gif.images!.fixedWidth.webp!,
+                      gaplessPlayback: true,
+                      fit: BoxFit.fill,
+                      headers: const {'accept': 'image/*'},
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) {
+                          return child;
+                        }
+                        return AspectRatio(
+                          aspectRatio: aspectRatio,
+                          child: Container(color: Theme.of(context).cardColor),
+                        );
+                      },
+                      errorBuilder: (context, exception, stackTrace) {
+                        return AspectRatio(
+                          aspectRatio: aspectRatio,
+                          child: Container(
+                            color: Theme.of(context).cardColor,
+                          ),
+                        );
+                      },
+                    ),
+            ),
+          );
         },
-      ),
-    );
-  }
-
-  Widget _item(GiphyGif gif) {
-    double aspectRatio = (double.parse(gif.images!.fixedWidth.width) /
-        double.parse(gif.images!.fixedWidth.height));
-
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(10.0),
-      child: InkWell(
-        onTap: () => _selectedGif(gif),
-        child: gif.images == null || gif.images?.fixedWidth.webp == null
-            ? Container()
-            : Image.network(
-                gif.images!.fixedWidth.webp!,
-                gaplessPlayback: true,
-                fit: BoxFit.fill,
-                headers: const {'accept': 'image/*'},
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress == null) {
-                    return child;
-                  }
-                  return AspectRatio(
-                    aspectRatio: aspectRatio,
-                    child: Container(color: Theme.of(context).cardColor),
-                  );
-                },
-                errorBuilder: (context, exception, stackTrace) => AspectRatio(
-                  aspectRatio: aspectRatio,
-                  child: Container(color: Theme.of(context).cardColor),
-                ),
-              ),
       ),
     );
   }
@@ -560,12 +562,10 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
     }
   }
 
-  // Return selected gif
   void _selectedGif(GiphyGif gif) {
     Navigator.pop(context, gif);
   }
 
-  // listener query
   void _listenerQuery() {
     _collection = null;
     _list = [];
