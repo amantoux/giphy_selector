@@ -1,5 +1,5 @@
-name: giphy_get_demo
-description: giphy_get Demo APP.
+name: giphy_selector_demo
+description: giphy_selector Demo APP.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.1+1

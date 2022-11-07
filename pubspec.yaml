@@ -1,6 +1,6 @@
 name: giphy_selector
 description: A Flutter plugin enabling the selection of a GIPHY GIF, Sticker or Emoji
-version: 1.1.0
+version: 1.1.1
 homepage: https://github.com/amantoux/giphy_selector
 
 
