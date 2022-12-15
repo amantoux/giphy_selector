@@ -64,8 +64,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   GiphyGif currentGif;
   GiphyClient client;
-  String randomId = "";
-  String giphyApiKey = 'dVy51G92K4VqOMBVv6o4MJIrsefzHDyt';
+  String randomId = '';
+  String giphyApiKey = '';
 
   @override
   void initState() {

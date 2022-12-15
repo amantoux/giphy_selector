@@ -50,23 +50,28 @@ This is for get gif without wrapper and tap to more
 ```dart 
 import 'package:giphy_selector/giphy_selector.dart';
 
-GiphyGif gif = await GiphyGet.getGif(
+GiphyGif gif = await GiphySelector.getGif(
   context: context, //Required
   apiKey: "your api key HERE", //Required.
   lang: GiphyLanguage.english, //Optional - Language for query.
-  randomID: "abcd", // Optional - An ID/proxy for a specific user. 
+  randomID: "abcd", // Optional - An ID/proxy for a specific user.
+  modalOptions: ModalOptions( // Option - Show Giphy selector in a modal
+    Offset.zero,
+    Alignment.topLeft
+  ),
   tabColor:Colors.teal, // Optional- default accent color.
 );
 ```
 
 ### Options
 
-| Value        | Type   | Description                                                                                                      | Default                         |
-|--------------|--------|------------------------------------------------------------------------------------------------------------------|---------------------------------|
-| `lang`       | String | Use [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) language code or use GiphyLanguage constants            | `GiphyLanguage.english`         | 
-| `randomID`   | String | An ID/proxy for a specific user.                                                                                 | `null`                          | 
-| `searchText` | String | Input search hint, we recommend use [flutter_18n package](https://pub.dev/packages/flutter_i18n) for translation | `"Search GIPHY"`                | 
-| `tabColor`   | Color  | Color for tabs and loading progress,                                                                             | `Theme.of(context).accentColor` | 
+| Value         | Type         | Description                                                                                                      | Default                         |
+|---------------|--------------|------------------------------------------------------------------------------------------------------------------|---------------------------------|
+| `lang`        | String       | Use [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) language code or use GiphyLanguage constants            | `GiphyLanguage.english`         | 
+| `randomID`    | String       | An ID/proxy for a specific user.                                                                                 | `null`                          | 
+| `searchText`  | String       | Input search hint, we recommend use [flutter_18n package](https://pub.dev/packages/flutter_i18n) for translation | `"Search GIPHY"`                |
+| `modalOptions` | ModalOptions | When not `null`, is used to position the Giphy selector in a modal                                               | `null`                          
+| `tabColor`    | Color        | Color for tabs and loading progress,                                                                             | `Theme.of(context).accentColor` | 
 
 ### [Get Random ID](https://developers.giphy.com/docs/api/endpoint#random-id)
 
