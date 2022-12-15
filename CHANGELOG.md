@@ -1,9 +1,13 @@
+### 1.2.0
+* Add support for macOS in `example`
+* `GiphySelector` can be displayed in a modal
+
 ### 1.1.1
 * [Fix] Better handling of assets
 
 ### 1.1.0
 
-* [New] Add custom Giphy selection handler
+* Add custom Giphy selection handler
 
 ### 1.0.1
 
