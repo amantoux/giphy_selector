@@ -1,3 +1,6 @@
+### 1.2.1
+* [Fix] Use root navigator for modal
+
 ### 1.2.0
 * Add support for macOS in `example`
 * `GiphySelector` can be displayed in a modal

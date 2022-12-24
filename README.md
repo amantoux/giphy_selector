@@ -9,7 +9,7 @@ Inspired by [giphy_get](https://github.com/bazookon/giphy_get)
 This package allow to get gifs, sticker or emojis from [GIPHY](https://www.giphy.com/) in pure dart
 code using [Giphy SDK](https://developers.giphy.com/docs/sdk) design guidelines.
 
-<img src="https://github.com/amantoux/giphy_selector/raw/main/example/assets/demo/giphy_selector_widget.gif" width="360" />
+<img src="https://github.com/amantoux/giphy_selector/raw/master/example/assets/demo/giphy_selector_widget.gif" width="360" />
 
 ## Getting Started
 
