@@ -23,7 +23,7 @@ class GiphySelector {
       throw Exception('apiKey must be not null or not empty');
     }
     if (modalOptions != null) {
-      return Navigator.of(context).push(
+      return Navigator.of(context, rootNavigator: true).push(
         RawDialogRoute(
           barrierDismissible: true,
           barrierColor: Colors.transparent,
@@ -121,7 +121,7 @@ class GiphySelector {
                       : null,
                   child: Container(
                     constraints:
-                    const BoxConstraints(maxHeight: 400, maxWidth: 400),
+                        const BoxConstraints(maxHeight: 400, maxWidth: 400),
                     color: Colors.red,
                     child: GiphySelectorModal(
                       apiKey: apiKey,
