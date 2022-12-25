@@ -97,6 +97,7 @@ class GiphySelectorSheetState extends GiphySelectorContainer<GiphySelectorSheet>
               SearchAppBar(
                 scrollController: _scrollController,
                 searchController: _searchController,
+                focusNode: focus,
                 focusListener: _focusListener,
               ),
               Expanded(

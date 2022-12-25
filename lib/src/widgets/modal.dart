@@ -31,7 +31,7 @@ class GiphySelectorModal extends StatefulWidget {
 
 class GiphySelectorModalState extends GiphySelectorContainer<GiphySelectorModal>
     with SingleTickerProviderStateMixin {
-  final _searchController = SearchController("");
+  final _searchController = SearchController('');
 
   late TabController _tabController;
   final _scrollController = ScrollController();
@@ -79,6 +79,7 @@ class GiphySelectorModalState extends GiphySelectorContainer<GiphySelectorModal>
             SearchAppBar(
               scrollController: _scrollController,
               searchController: _searchController,
+              focusNode: focus,
             ),
             Expanded(
               child: GiphyTabView(
