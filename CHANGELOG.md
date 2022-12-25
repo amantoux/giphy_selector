@@ -1,3 +1,6 @@
+### 1.2.2
+* Remove focus from search field when scrolling selector 
+
 ### 1.2.1
 * [Fix] Use root navigator for modal
 
