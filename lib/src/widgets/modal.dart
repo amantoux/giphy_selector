@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../client/client.dart';
 import 'config.dart';
-import 'search_controller.dart';
+import 'search_controller.dart' as intern;
 import 'selector.dart';
 
 class GiphySelectorModal extends StatefulWidget {
@@ -31,7 +31,7 @@ class GiphySelectorModal extends StatefulWidget {
 
 class GiphySelectorModalState extends GiphySelectorContainer<GiphySelectorModal>
     with SingleTickerProviderStateMixin {
-  final _searchController = SearchController('');
+  final _searchController = intern.SearchController('');
 
   late TabController _tabController;
   final _scrollController = ScrollController();

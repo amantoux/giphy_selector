@@ -1,3 +1,6 @@
+### 1.3.0
+* Flutter 3.10 compatibility
+
 ### 1.2.2
 * Remove focus from search field when scrolling selector 
 

@@ -18,7 +18,7 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -52,9 +52,9 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  final String title;
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
 
-  const MyHomePage({Key key, this.title}) : super(key: key);
+  final String title;
 
   @override
   // ignore: library_private_types_in_public_api
@@ -62,8 +62,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  GiphyGif currentGif;
-  GiphyClient client;
+  GiphyGif? currentGif;
+  late final GiphyClient client;
   String randomId = '';
   String giphyApiKey = '';
 
@@ -127,7 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ? SizedBox(
                             child: GiphyGifWidget(
                               imageAlignment: Alignment.center,
-                              gif: currentGif,
+                              gif: currentGif!,
                               giphyGetWrapper: giphyGetWrapper,
                               borderRadius: BorderRadius.circular(30),
                               showGiphyLabel: true,

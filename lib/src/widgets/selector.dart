@@ -6,7 +6,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../client/client.dart';
 import 'config.dart';
-import 'search_controller.dart';
+import 'search_controller.dart' as intern;
 
 abstract class GiphySelectorContainer<T extends StatefulWidget>
     extends State<T> {
@@ -95,7 +95,7 @@ class GiphyTabTop extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 8.0),
       width: 50,
       height: 2,
-      color: Theme.of(context).textTheme.bodyText1!.color!,
+      color: Theme.of(context).textTheme.bodyLarge!.color!,
     );
   }
 }
@@ -110,7 +110,7 @@ class SearchAppBar extends StatefulWidget {
       : super(key: key);
 
   final ScrollController scrollController;
-  final SearchController searchController;
+  final intern.SearchController searchController;
   final FocusNode focusNode;
   final Function(FocusNode)? focusListener;
 
@@ -192,7 +192,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
                                 Icons.clear,
                                 color: Theme.of(context)
                                     .textTheme
-                                    .bodyText1!
+                                    .bodyLarge!
                                     .color!,
                               ),
                               onPressed: () {
@@ -257,7 +257,7 @@ class GiphyTabView extends StatelessWidget {
 
   final ScrollController scrollController;
   final TabController tabController;
-  final SearchController searchController;
+  final intern.SearchController searchController;
 
   @override
   Widget build(BuildContext context) {
@@ -295,7 +295,7 @@ class GiphyTabDetail extends StatefulWidget {
 
   final String type;
   final ScrollController scrollController;
-  final SearchController searchController;
+  final intern.SearchController searchController;
 
   @override
   State<GiphyTabDetail> createState() => _GiphyTabDetailState();
