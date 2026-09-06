@@ -1,3 +1,8 @@
+### 1.5.0
+* Upgraded dependencies
+* Upgrade to Flutter 3.47
+* Migration to `material_ui`
+
 ### 1.4.0
 * Upgraded dependencies
   
