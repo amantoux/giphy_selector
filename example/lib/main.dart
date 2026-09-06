@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:giphy_selector/giphy_selector.dart';
+import 'package:material_ui/material_ui.dart' hide GlobalMaterialLocalizations;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

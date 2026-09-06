@@ -5,28 +5,34 @@ class GiphyCollection {
   final GiphyPagination? pagination;
   final GiphyMeta? meta;
 
-  GiphyCollection(
-      {required this.data, required this.pagination, required this.meta});
+  GiphyCollection({
+    required this.data,
+    required this.pagination,
+    required this.meta,
+  });
 
   factory GiphyCollection.fromJson(Map<String, dynamic> json) {
     return GiphyCollection(
-        data: json.containsKey('data')
-            ? (json['data'] as List)
+      data: json.containsKey('data')
+          ? (json['data'] as List)
                 .whereType<Map<String, dynamic>>()
                 .map((e) => GiphyGif.fromJson(e))
                 .toList(growable: false)
-            : List<GiphyGif>.empty(),
-        pagination: json.containsKey('pagination')
-            ? GiphyPagination.fromJson(
-                json['pagination'] as Map<String, dynamic>)
-            : null,
-        meta: json.containsKey('meta')
-            ? GiphyMeta.fromJson(json['meta'] as Map<String, dynamic>)
-            : null);
+          : List<GiphyGif>.empty(),
+      pagination: json.containsKey('pagination')
+          ? GiphyPagination.fromJson(json['pagination'] as Map<String, dynamic>)
+          : null,
+      meta: json.containsKey('meta')
+          ? GiphyMeta.fromJson(json['meta'] as Map<String, dynamic>)
+          : null,
+    );
   }
 
-  Map<String, dynamic> toJson() =>
-      <String, dynamic>{'data': data, 'pagination': pagination, 'meta': meta};
+  Map<String, dynamic> toJson() => <String, dynamic>{
+    'data': data,
+    'pagination': pagination,
+    'meta': meta,
+  };
 
   @override
   String toString() {
@@ -51,20 +57,24 @@ class GiphyPagination {
   final int count;
   final int offset;
 
-  GiphyPagination(
-      {required this.totalCount, required this.count, required this.offset});
+  GiphyPagination({
+    required this.totalCount,
+    required this.count,
+    required this.offset,
+  });
 
   factory GiphyPagination.fromJson(Map<String, dynamic> json) =>
       GiphyPagination(
-          totalCount: json['total_count'] as int? ?? 0,
-          count: json['count'] as int? ?? 0,
-          offset: json['offset'] as int? ?? 0);
+        totalCount: json['total_count'] as int? ?? 0,
+        count: json['count'] as int? ?? 0,
+        offset: json['offset'] as int? ?? 0,
+      );
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
       'total_count': totalCount,
       'count': count,
-      'offset': offset
+      'offset': offset,
     };
   }
 
@@ -92,19 +102,23 @@ class GiphyMeta {
 
   final String responseId;
 
-  GiphyMeta(
-      {required this.status, required this.msg, required this.responseId});
+  GiphyMeta({
+    required this.status,
+    required this.msg,
+    required this.responseId,
+  });
 
   factory GiphyMeta.fromJson(Map<String, dynamic> json) => GiphyMeta(
-      status: json['status'] as int? ?? 0,
-      msg: json['msg'] as String? ?? '',
-      responseId: json['response_id'] as String? ?? '');
+    status: json['status'] as int? ?? 0,
+    msg: json['msg'] as String? ?? '',
+    responseId: json['response_id'] as String? ?? '',
+  );
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
       'status': status,
       'msg': msg,
-      'response_id': responseId
+      'response_id': responseId,
     };
   }
 

@@ -23,7 +23,7 @@ abstract class GiphyGetUILocalizationLabels {
 const localizations = <String, GiphyGetUILocalizationLabels>{
   'en': EnLocalizations(),
   'fr': FrLocalizations(),
-  'es': EsLocalizations()
+  'es': EsLocalizations(),
 };
 
 class DefaultLocalizations extends EnLocalizations {

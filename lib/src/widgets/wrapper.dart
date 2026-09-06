@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:giphy_selector/src/widgets/config.dart';
 import 'package:giphy_selector/src/widgets/modal.dart';
 
@@ -27,7 +27,7 @@ class GiphySelector {
         RawDialogRoute(
           barrierDismissible: true,
           barrierColor: Colors.transparent,
-          pageBuilder: (context, _, __) {
+          pageBuilder: (context, _, _) {
             return Stack(
               children: [
                 Positioned(
@@ -44,8 +44,10 @@ class GiphySelector {
                       ? modalOptions.anchor.dx
                       : null,
                   child: Container(
-                    constraints:
-                        const BoxConstraints(maxHeight: 400, maxWidth: 400),
+                    constraints: const BoxConstraints(
+                      maxHeight: 400,
+                      maxWidth: 400,
+                    ),
                     color: Colors.red,
                     child: GiphySelectorModal(
                       apiKey: apiKey,
@@ -56,7 +58,7 @@ class GiphySelector {
                       tabColor: tabColor,
                     ),
                   ),
-                )
+                ),
               ],
             );
           },
@@ -67,7 +69,8 @@ class GiphySelector {
     return showModalBottomSheet<GiphyGif>(
       clipBehavior: Clip.antiAlias,
       shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(10.0))),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(10.0)),
+      ),
       isScrollControlled: true,
       context: context,
       builder: (ctx) => GiphySelectorSheet(
@@ -103,7 +106,7 @@ class GiphySelector {
         RawDialogRoute(
           barrierDismissible: true,
           barrierColor: Colors.transparent,
-          pageBuilder: (context, _, __) {
+          pageBuilder: (context, _, _) {
             return Stack(
               children: [
                 Positioned(
@@ -120,8 +123,10 @@ class GiphySelector {
                       ? mediaQuery.size.width - modalOptions.anchor.dx
                       : null,
                   child: Container(
-                    constraints:
-                        const BoxConstraints(maxHeight: 400, maxWidth: 400),
+                    constraints: const BoxConstraints(
+                      maxHeight: 400,
+                      maxWidth: 400,
+                    ),
                     color: Colors.red,
                     child: GiphySelectorModal(
                       apiKey: apiKey,
@@ -133,7 +138,7 @@ class GiphySelector {
                       onSelectGiphyItem: onSelectGiphyItem,
                     ),
                   ),
-                )
+                ),
               ],
             );
           },
@@ -162,23 +167,27 @@ class GiphySelector {
 }
 
 typedef GiphySelectorWrapperBuilder = Widget Function(
-    Stream<GiphyGif>, GiphySelectorWrapper);
+  Stream<GiphyGif>,
+  GiphySelectorWrapper,
+);
 
 class GiphySelectorWrapper extends StatelessWidget {
+  new({super.key, required this.apiKey, required this.builder});
+
   final String apiKey;
   final GiphySelectorWrapperBuilder builder;
   final streamController = StreamController<GiphyGif>.broadcast();
-
-  GiphySelectorWrapper({Key? key, required this.apiKey, required this.builder})
-      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return builder(streamController.stream, this);
   }
 
-  getGif(String queryText, BuildContext context,
-      {ModalOptions? modalOptions}) async {
+  Future<void> getGif(
+    String queryText,
+    BuildContext context, {
+    ModalOptions? modalOptions,
+  }) async {
     GiphyGif? gif = await GiphySelector.getGif(
       queryText: queryText,
       context: context,

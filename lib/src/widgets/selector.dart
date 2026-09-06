@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../client/client.dart';
@@ -26,9 +26,8 @@ abstract class GiphySelectorContainer<T extends StatefulWidget>
   }
 }
 
-class GiphyTabBar extends StatefulWidget {
-  const GiphyTabBar({Key? key, required this.tabController, this.color})
-      : super(key: key);
+class const GiphyTabBar({super.key, required this.tabController, this.color})
+    extends StatefulWidget {
   final TabController tabController;
   final Color? color;
 
@@ -51,7 +50,7 @@ class _GiphyTabBarState extends State<GiphyTabBar> {
     _tabs = [
       Tab(text: labels.gifsLabel),
       Tab(text: labels.stickersLabel),
-      Tab(text: labels.emojisLabel)
+      Tab(text: labels.emojisLabel),
     ];
     super.didChangeDependencies();
   }
@@ -71,7 +70,7 @@ class _GiphyTabBarState extends State<GiphyTabBar> {
     );
   }
 
-  _setTabType(int pos, BuildContext context) {
+  void _setTabType(int pos, BuildContext context) {
     final sheetState = GiphySelectorContainer.of(context);
     switch (widget.tabController.index) {
       case 0:
@@ -101,13 +100,13 @@ class GiphyTabTop extends StatelessWidget {
 }
 
 class SearchAppBar extends StatefulWidget {
-  const SearchAppBar(
-      {Key? key,
-      required this.scrollController,
-      required this.searchController,
-      required this.focusNode,
-      this.focusListener})
-      : super(key: key);
+  const SearchAppBar({
+    super.key,
+    required this.scrollController,
+    required this.searchController,
+    required this.focusNode,
+    this.focusListener,
+  });
 
   final ScrollController scrollController;
   final intern.SearchController searchController;
@@ -128,8 +127,9 @@ class _SearchAppBarState extends State<SearchAppBar> {
     if (widget.focusListener != null) {
       focus.addListener(() => widget.focusListener!(focus));
     }
-    _textEditingController =
-        TextEditingController(text: widget.searchController.value);
+    _textEditingController = TextEditingController(
+      text: widget.searchController.value,
+    );
     _textEditingController.addListener(() {
       if (widget.searchController.value != _textEditingController.text) {
         widget.searchController.value = _textEditingController.text;
@@ -172,34 +172,37 @@ class _SearchAppBarState extends State<SearchAppBar> {
                               : ShaderMask(
                                   shaderCallback: (bounds) =>
                                       const LinearGradient(
-                                          begin: Alignment.topRight,
-                                          end: Alignment.bottomLeft,
-                                          colors: [
-                                        Color(0xFFFF6666),
-                                        Color(0xFF9933FF),
-                                      ]).createShader(bounds),
+                                        begin: Alignment.topRight,
+                                        end: Alignment.bottomLeft,
+                                        colors: [
+                                          Color(0xFFFF6666),
+                                          Color(0xFF9933FF),
+                                        ],
+                                      ).createShader(bounds),
                                   child: Transform(
-                                      alignment: Alignment.center,
-                                      transform: Matrix4.rotationY(pi),
-                                      child: const Icon(
-                                        Icons.search,
-                                        color: Colors.white,
-                                      )),
+                                    alignment: Alignment.center,
+                                    transform: Matrix4.rotationY(pi),
+                                    child: const Icon(
+                                      Icons.search,
+                                      color: Colors.white,
+                                    ),
+                                  ),
                                 ),
                           hintText: l.searchInputLabel,
                           suffixIcon: IconButton(
-                              icon: Icon(
-                                Icons.clear,
-                                color: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge!
-                                    .color!,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  _textEditingController.clear();
-                                });
-                              }),
+                            icon: Icon(
+                              Icons.clear,
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .color!,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _textEditingController.clear();
+                              });
+                            },
+                          ),
                           focusedBorder: InputBorder.none,
                           enabledBorder: InputBorder.none,
                           errorBorder: InputBorder.none,
@@ -217,7 +220,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
 }
 
 class GiphyTabBottom extends StatelessWidget {
-  const GiphyTabBottom({Key? key}) : super(key: key);
+  const GiphyTabBottom({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -237,23 +240,22 @@ class GiphyTabBottom extends StatelessWidget {
       width: double.maxFinite,
       height: 15,
       decoration: BoxDecoration(
-          image: DecorationImage(
-              fit: BoxFit.fitHeight,
-              image: AssetImage(
-                "$basePath$logoPath",
-                package: 'giphy_selector',
-              ))),
+        image: DecorationImage(
+          fit: BoxFit.fitHeight,
+          image: AssetImage("$basePath$logoPath", package: 'giphy_selector'),
+        ),
+      ),
     );
   }
 }
 
 class GiphyTabView extends StatelessWidget {
-  const GiphyTabView(
-      {Key? key,
-      required this.scrollController,
-      required this.tabController,
-      required this.searchController})
-      : super(key: key);
+  const GiphyTabView({
+    super.key,
+    required this.scrollController,
+    required this.tabController,
+    required this.searchController,
+  });
 
   final ScrollController scrollController;
   final TabController tabController;
@@ -279,19 +281,19 @@ class GiphyTabView extends StatelessWidget {
           type: GiphyType.emoji,
           scrollController: scrollController,
           searchController: searchController,
-        )
+        ),
       ],
     );
   }
 }
 
 class GiphyTabDetail extends StatefulWidget {
-  const GiphyTabDetail(
-      {Key? key,
-      required this.type,
-      required this.scrollController,
-      required this.searchController})
-      : super(key: key);
+  const GiphyTabDetail({
+    super.key,
+    required this.type,
+    required this.scrollController,
+    required this.searchController,
+  });
 
   final String type;
   final ScrollController scrollController;
@@ -338,10 +340,14 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
     super.didChangeDependencies();
     widget.scrollController.addListener(_scrollListener);
     widget.searchController.addListener(_listenerQuery);
-    _crossAxisCount =
-        min((MediaQuery.of(context).size.width / _gifWidth).round(), 3);
+    _crossAxisCount = min(
+      (MediaQuery.of(context).size.width / _gifWidth).round(),
+      3,
+    );
     int mainAxisCount = min(
-        ((MediaQuery.of(context).size.height - 30) / _gifWidth).round(), 10);
+      ((MediaQuery.of(context).size.height - 30) / _gifWidth).round(),
+      10,
+    );
     _limit = _crossAxisCount * mainAxisCount;
     offset = 0;
     _loadMore();
@@ -356,9 +362,7 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
   @override
   Widget build(BuildContext context) {
     if (_list.isEmpty) {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
+      return const Center(child: CircularProgressIndicator());
     }
     final config = GiphySelectorConfig.of(context);
     return Padding(
@@ -373,7 +377,8 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
         crossAxisSpacing: _spacing,
         itemBuilder: (ctx, idx) {
           GiphyGif gif = _list[idx];
-          double aspectRatio = (double.parse(gif.images!.fixedWidth.width) /
+          double aspectRatio =
+              (double.parse(gif.images!.fixedWidth.width) /
               double.parse(gif.images!.fixedWidth.height));
           return ClipRRect(
             borderRadius: BorderRadius.circular(10.0),
@@ -398,9 +403,7 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
                       errorBuilder: (context, exception, stackTrace) {
                         return AspectRatio(
                           aspectRatio: aspectRatio,
-                          child: Container(
-                            color: Theme.of(context).cardColor,
-                          ),
+                          child: Container(color: Theme.of(context).cardColor),
                         );
                       },
                     ),
@@ -419,8 +422,10 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
 
     _isLoading = true;
     final config = GiphySelectorConfig.of(context);
-    final client =
-        GiphyClient(apiKey: config.apiKey, randomId: config.randomID);
+    final client = GiphyClient(
+      apiKey: config.apiKey,
+      randomId: config.randomID,
+    );
 
     // Offset pagination for query
     if (_collection == null) {
@@ -435,19 +440,22 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
     } else {
       final query = widget.searchController.value;
       if (query.isNotEmpty) {
-        _collection = await client.search(query,
-            lang: config.language,
-            offset: offset,
-            rating: config.rating,
-            type: widget.type,
-            limit: _limit);
+        _collection = await client.search(
+          query,
+          lang: config.language,
+          offset: offset,
+          rating: config.rating,
+          type: widget.type,
+          limit: _limit,
+        );
       } else {
         _collection = await client.trending(
-            lang: config.language,
-            offset: offset,
-            rating: config.rating,
-            type: widget.type,
-            limit: _limit);
+          lang: config.language,
+          offset: offset,
+          rating: config.rating,
+          type: widget.type,
+          limit: _limit,
+        );
       }
     }
 

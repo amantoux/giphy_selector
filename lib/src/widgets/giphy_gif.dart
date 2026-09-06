@@ -1,26 +1,24 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../client/client.dart';
 import 'wrapper.dart';
 
-class GiphyGifWidget extends StatefulWidget {
+class const GiphyGifWidget({
+  super.key,
+  required this.gif,
+  required this.giphyGetWrapper,
+  this.borderRadius,
+  this.imageAlignment = Alignment.center,
+  this.showGiphyLabel = true,
+}) extends StatefulWidget {
   final GiphyGif gif;
   final GiphySelectorWrapper giphyGetWrapper;
   final bool showGiphyLabel;
   final BorderRadius? borderRadius;
   final Alignment imageAlignment;
-
-  const GiphyGifWidget(
-      {Key? key,
-      required this.gif,
-      required this.giphyGetWrapper,
-      this.borderRadius,
-      this.imageAlignment = Alignment.center,
-      this.showGiphyLabel = true})
-      : super(key: key);
 
   @override
   State<GiphyGifWidget> createState() => _GiphyGifWidgetState();
@@ -62,19 +60,18 @@ class _GiphyGifWidgetState extends State<GiphyGifWidget> {
                 width: double.parse(widget.gif.images!.fixedWidth.width),
                 height: double.parse(widget.gif.images!.fixedWidth.height),
                 clipBehavior: Clip.hardEdge,
-                decoration: BoxDecoration(
-                  borderRadius: widget.borderRadius,
-                ),
+                decoration: BoxDecoration(borderRadius: widget.borderRadius),
                 child: Image.network(widget.gif.images!.fixedWidth.url),
               ),
             ),
             widget.showGiphyLabel
                 ? FittedBox(
                     child: Text(
-                    l.poweredByGiphy,
-                    style: const TextStyle(fontSize: 12),
-                  ))
-                : Container()
+                      l.poweredByGiphy,
+                      style: const TextStyle(fontSize: 12),
+                    ),
+                  )
+                : Container(),
           ],
         ),
         IgnorePointer(
@@ -86,43 +83,43 @@ class _GiphyGifWidgetState extends State<GiphyGifWidget> {
               height: 35,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Colors.black.withOpacity(0.8),
+                color: Colors.black.withValues(alpha: 0.8),
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   TextButton(
-                      onPressed: () {
-                        launchUrl(Uri.parse(widget.gif.url!));
-                      },
-                      child: Text(
-                        l.viewOnGiphy,
-                        style: buttonsTextStyle,
-                      )),
+                    onPressed: () {
+                      launchUrl(Uri.parse(widget.gif.url!));
+                    },
+                    child: Text(l.viewOnGiphy, style: buttonsTextStyle),
+                  ),
                   const SizedBox(
                     height: 15,
-                    child: VerticalDivider(
-                      color: Colors.white54,
-                      thickness: 1,
-                    ),
+                    child: VerticalDivider(color: Colors.white54, thickness: 1),
                   ),
                   TextButton(
-                      onPressed: () {
-                        widget.giphyGetWrapper
-                            .getGif('@${widget.gif.username}', context);
-                      },
-                      child: Text('${l.moreBy} @${widget.gif.username}',
-                          style: buttonsTextStyle))
+                    onPressed: () {
+                      widget.giphyGetWrapper.getGif(
+                        '@${widget.gif.username}',
+                        context,
+                      );
+                    },
+                    child: Text(
+                      '${l.moreBy} @${widget.gif.username}',
+                      style: buttonsTextStyle,
+                    ),
+                  ),
                 ],
               ),
             ),
           ),
-        )
+        ),
       ],
     );
   }
 
-  _triggerShowHideMenu() {
+  void _triggerShowHideMenu() {
     _timerMenu?.cancel();
     setState(() => _showMenu = true);
     _timerMenu = Timer(

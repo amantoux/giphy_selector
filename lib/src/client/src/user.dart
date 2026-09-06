@@ -56,17 +56,18 @@ class GiphyUser {
       displayName: json != null && json.containsKey('display_name')
           ? json['display_name']
           : null,
-      twitter:
-          json != null && json.containsKey('twitter') ? json['twitter'] : null,
+      twitter: json != null && json.containsKey('twitter')
+          ? json['twitter']
+          : null,
       guid: json != null && json.containsKey('guid') ? json['guid'] : null,
       metadataDescription:
           json != null && json.containsKey('metadata_description')
-              ? json['metadata_description']
-              : null,
+          ? json['metadata_description']
+          : null,
       attributionDisplayName:
           json != null && json.containsKey('attribution_display_name')
-              ? json['attribution_display_name']
-              : null,
+          ? json['attribution_display_name']
+          : null,
       name: json != null && json.containsKey('name') ? json['name'] : null,
       description: json != null && json.containsKey('description')
           ? json['description']

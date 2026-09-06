@@ -1,22 +1,20 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../client/client.dart';
 import 'config.dart';
 import 'search_controller.dart' as intern;
 import 'selector.dart';
 
-class GiphySelectorModal extends StatefulWidget {
-  const GiphySelectorModal(
-      {Key? key,
-      required this.apiKey,
-      this.onSelectGiphyItem,
-      this.searchText,
-      this.rating = GiphyRating.g,
-      this.lang = GiphyLanguage.english,
-      this.randomID = '',
-      this.tabColor})
-      : super(key: key);
-
+class const GiphySelectorModal({
+  super.key,
+  required this.apiKey,
+  this.onSelectGiphyItem,
+  this.searchText,
+  this.rating = GiphyRating.g,
+  this.lang = GiphyLanguage.english,
+  this.randomID = '',
+  this.tabColor,
+}) extends StatefulWidget {
   final String apiKey;
   final OnSelectGiphyItem? onSelectGiphyItem;
   final String? searchText;
@@ -72,10 +70,7 @@ class GiphySelectorModalState extends GiphySelectorContainer<GiphySelectorModal>
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            GiphyTabBar(
-              tabController: _tabController,
-              color: widget.tabColor,
-            ),
+            GiphyTabBar(tabController: _tabController, color: widget.tabColor),
             SearchAppBar(
               scrollController: _scrollController,
               searchController: _searchController,
@@ -88,7 +83,7 @@ class GiphySelectorModalState extends GiphySelectorContainer<GiphySelectorModal>
                 searchController: _searchController,
               ),
             ),
-            const GiphyTabBottom()
+            const GiphyTabBottom(),
           ],
         ),
       ),

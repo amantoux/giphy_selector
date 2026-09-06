@@ -1,29 +1,21 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../client/client.dart';
 import 'config.dart';
 import 'search_controller.dart' as intern;
 import 'selector.dart';
 
-class GiphySelectorSheet extends StatefulWidget {
-  const GiphySelectorSheet(
-      {Key? key,
-      required this.apiKey,
-      this.onSelectGiphyItem,
-      this.searchText,
-      this.rating = GiphyRating.g,
-      this.lang = GiphyLanguage.english,
-      this.randomID = '',
-      this.tabColor})
-      : super(key: key);
-
+class const GiphySelectorSheet({
+  super.key,
+  required this.apiKey,
+  final OnSelectGiphyItem? onSelectGiphyItem,
+  final String? searchText,
+  final String rating = GiphyRating.g,
+  final String lang = GiphyLanguage.english,
+  final String randomID = '',
+  final Color? tabColor,
+}) extends StatefulWidget {
   final String apiKey;
-  final OnSelectGiphyItem? onSelectGiphyItem;
-  final String? searchText;
-  final String rating;
-  final String lang;
-  final String randomID;
-  final Color? tabColor;
 
   @override
   State<GiphySelectorSheet> createState() => GiphySelectorSheetState();
@@ -107,7 +99,7 @@ class GiphySelectorSheetState extends GiphySelectorContainer<GiphySelectorSheet>
                   searchController: _searchController,
                 ),
               ),
-              const GiphyTabBottom()
+              const GiphyTabBottom(),
             ],
           );
         },
