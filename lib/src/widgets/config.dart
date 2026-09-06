@@ -8,14 +8,15 @@ class GiphySelectorConfig extends InheritedWidget {
   static GiphySelectorConfig of(BuildContext context) =>
       context.findAncestorWidgetOfExactType<GiphySelectorConfig>()!;
 
-  const GiphySelectorConfig(
-      {super.key,
-      required this.apiKey,
-      required this.randomID,
-      required this.rating,
-      required this.language,
-      this.onSelectGiphyItem,
-      required super.child});
+  const GiphySelectorConfig({
+    super.key,
+    required this.apiKey,
+    required this.randomID,
+    required this.rating,
+    required this.language,
+    this.onSelectGiphyItem,
+    required super.child,
+  });
 
   final String apiKey;
   final String randomID;

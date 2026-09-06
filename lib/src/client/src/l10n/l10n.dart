@@ -34,7 +34,7 @@ class GiphyGetUILocalizations<T extends GiphyGetUILocalizationLabels> {
       const GiphyGetUILocalizationDelegate();
 
   static GiphyGetUILocalizationDelegate
-      withDefaultOverrides<T extends EnLocalizations>(T overrides) {
+  withDefaultOverrides<T extends EnLocalizations>(T overrides) {
     return GiphyGetUILocalizationDelegate<T>(overrides);
   }
 }

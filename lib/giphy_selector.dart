@@ -1,4 +1,4 @@
-library giphy_selector;
+library;
 
 export 'src/client/client.dart';
 export 'src/widgets/giphy_gif.dart';

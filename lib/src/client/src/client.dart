@@ -12,17 +12,14 @@ import 'type.dart';
 
 const _maxPaginationLimit = 100;
 
-class GiphyClient {
+class GiphyClient({
+  required final String _apiKey,
+  required final String _randomId,
+}) {
   static final baseUri = Uri(scheme: 'https', host: 'api.giphy.com');
 
-  final String _apiKey;
-  final Client _client = Client();
-  final String _randomID;
+  final Client _client = .new();
   final String _apiVersion = 'v1';
-
-  GiphyClient({required String apiKey, required String randomId})
-      : _apiKey = apiKey,
-        _randomID = randomId;
 
   Future<GiphyCollection> trending({
     int offset = 0,
@@ -38,7 +35,7 @@ class GiphyClient {
           'offset': '$offset',
           'limit': '${_effectiveLimit(limit)}',
           'rating': rating,
-          'lang': lang
+          'lang': lang,
         },
       ),
     );
@@ -93,10 +90,7 @@ class GiphyClient {
     return _fetchGif(
       baseUri.replace(
         path: '$_apiVersion/$type/random',
-        queryParameters: <String, String>{
-          'tag': tag,
-          'rating': rating,
-        },
+        queryParameters: <String, String>{'tag': tag, 'rating': rating},
       ),
     );
   }
@@ -112,15 +106,18 @@ class GiphyClient {
   Future<GiphyGif> _fetchGif(Uri uri) async {
     final response = await _getWithAuthorization(uri);
 
-    return GiphyGif.fromJson((json.decode(response.body)
-        as Map<String, dynamic>)['data'] as Map<String, dynamic>);
+    return GiphyGif.fromJson(
+      (json.decode(response.body) as Map<String, dynamic>)['data']
+          as Map<String, dynamic>,
+    );
   }
 
   Future<GiphyCollection> _fetchCollection(Uri uri) async {
     final response = await _getWithAuthorization(uri);
 
     return GiphyCollection.fromJson(
-        json.decode(response.body) as Map<String, dynamic>);
+      json.decode(response.body) as Map<String, dynamic>,
+    );
   }
 
   Future<String> _getRandomId(Uri uri) async {
@@ -132,10 +129,11 @@ class GiphyClient {
   Future<Response> _getWithAuthorization(Uri uri) async {
     Map<String, String> queryParams = Map.from(uri.queryParameters)
       ..putIfAbsent('api_key', () => _apiKey)
-      ..putIfAbsent('random_id', () => _randomID);
+      ..putIfAbsent('random_id', () => _randomId);
 
-    final response =
-        await _client.get(uri.replace(queryParameters: queryParams));
+    final response = await _client.get(
+      uri.replace(queryParameters: queryParams),
+    );
 
     if (response.statusCode == 200) {
       return response;

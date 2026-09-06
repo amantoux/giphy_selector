@@ -12,10 +12,7 @@ Future<void> main() async {
 
   group('GiphyClient', () {
     test('should fetch trending gifs', () async {
-      final client = GiphyClient(
-        apiKey: apiKey,
-        randomId: '',
-      );
+      final client = GiphyClient(apiKey: apiKey, randomId: '');
 
       final collection = await client.trending();
 
@@ -23,10 +20,7 @@ Future<void> main() async {
     });
 
     test('should search gifs', () async {
-      final client = GiphyClient(
-        apiKey: apiKey,
-        randomId: '',
-      );
+      final client = GiphyClient(apiKey: apiKey, randomId: '');
 
       final collection = await client.search('');
 
@@ -34,10 +28,7 @@ Future<void> main() async {
     });
 
     test('should fetch emojis', () async {
-      final client = GiphyClient(
-        apiKey: apiKey,
-        randomId: '',
-      );
+      final client = GiphyClient(apiKey: apiKey, randomId: '');
 
       final collection = await client.emojis();
 
@@ -45,10 +36,7 @@ Future<void> main() async {
     });
 
     test('should load a random gif', () async {
-      final client = GiphyClient(
-        apiKey: apiKey,
-        randomId: '',
-      );
+      final client = GiphyClient(apiKey: apiKey, randomId: '');
 
       final gif = await client.random(tag: '');
 
@@ -56,23 +44,19 @@ Future<void> main() async {
     });
 
     test('should load a gif by id', () async {
-      final client = GiphyClient(
-        apiKey: apiKey,
-        randomId: '',
-      );
+      final client = GiphyClient(apiKey: apiKey, randomId: '');
 
       final gif = await client.byId('l46Cc0Ped9R0uiTkY');
 
       expect(gif, const TypeMatcher<GiphyGif>());
-      expect(gif.title?.toLowerCase(),
-          'Beyonce freedom GIF by BET Awards'.toLowerCase());
+      expect(
+        gif.title?.toLowerCase(),
+        'Beyonce freedom GIF by BET Awards'.toLowerCase(),
+      );
     });
 
     test('should parse gifs correctly', () async {
-      final client = GiphyClient(
-        apiKey: apiKey,
-        randomId: '',
-      );
+      final client = GiphyClient(apiKey: apiKey, randomId: '');
 
       // Gif Validation
       final gif = (await client.trending()).data.first;
@@ -81,10 +65,7 @@ Future<void> main() async {
     });
 
     test('should parse users correctly', () async {
-      final client = GiphyClient(
-        apiKey: apiKey,
-        randomId: '',
-      );
+      final client = GiphyClient(apiKey: apiKey, randomId: '');
 
       // Gif Validation
       final user = (await client.trending()).data.first.user;
@@ -93,10 +74,7 @@ Future<void> main() async {
     });
 
     test('should parse images correctly', () async {
-      final client = GiphyClient(
-        apiKey: apiKey,
-        randomId: '',
-      );
+      final client = GiphyClient(apiKey: apiKey, randomId: '');
 
       // Gif Validation
       final images = (await client.trending()).data.first.images;
@@ -104,7 +82,9 @@ Future<void> main() async {
       expect(images.originalStill, const TypeMatcher<GiphyStillImage>());
       // expect(images.fixedWidth, GiphyFullImage());
       expect(
-          images.fixedHeightSmallStill, const TypeMatcher<GiphyStillImage>());
+        images.fixedHeightSmallStill,
+        const TypeMatcher<GiphyStillImage>(),
+      );
       // expect(
       //   images.fixedHeightDownsampled,
       //   GiphyDownsampledImage(),
